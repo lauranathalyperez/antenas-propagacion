@@ -7,12 +7,45 @@ import plotly.graph_objects as go
 # ==========================================
 st.set_page_config(page_title="Radio-Sim V1.0", layout="wide", page_icon="📡")
 
-st.markdown("""
-    <style>
-    .stMetric { background-color: #ffffff; padding: 15px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-    h1, h2, h3 { color: #1E3A8A; }
-    </style>
-    """, unsafe_allow_html=True)
+# ==========================================
+# FUNCIÓN PARA CARGAR EL FONDO DESDE TU CARPETA
+# ==========================================
+def cargar_fondo_local(archivo_imagen):
+    try:
+        with open(archivo_imagen, "rb") as image_file:
+            encoded_string = base64.b64encode(image_file.read()).decode()
+
+        # Código CSS para aplicar el fondo de pantalla completo con opacidad/capa oscura
+        css_fondo = f"""
+        <style>
+        .stApp {{
+            background-image: linear-gradient(rgba(240, 242, 246, 0.85), rgba(240, 242, 246, 0.85)),
+                             url("data:image/jpg;base64,{encoded_string}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }}
+
+        /* Estilo pro para las tarjetas de resultados (Métricas) */
+        .stMetric {{
+            background-color: rgba(255, 255, 255, 0.9) !important;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }}
+
+        /* Cambiar ligeramente el color de los títulos para que contrasten */
+        h1, h2, h3 {{ color: #0F172A; }}
+        </style>
+        """
+        st.markdown(css_fondo, unsafe_allow_html=True)
+    except FileNotFoundError:
+        # Si aún no has descargado la imagen, el programa no se romperá
+        st.warning(f"⚠️ No se encontró el archivo '{archivo_imagen}' en la carpeta. Agrega tu imagen generada por IA para ver el fondo.")
+
+# Llamamos a la función. Reemplaza 'fondo.jpg' por el nombre exacto de tu imagen
+cargar_fondo_local("antenas.png")
 
 # ==========================================
 # MENÚ NAVEGACIÓN LATERAL
@@ -20,7 +53,7 @@ st.markdown("""
 st.sidebar.title("📑 Módulos Obligatorios")
 st.sidebar.markdown("Selecciona el eje temático a evaluar:")
 modulo = st.sidebar.radio("", [
-    "Inicio y Presentación",
+    "Inicio",
     "1. Propagación en Espacio Libre",
     "2. Atenuación por Lluvia",
     "3. Ruido Térmico y SNR",
@@ -33,11 +66,11 @@ modulo = st.sidebar.radio("", [
 # ==========================================
 # MÓDULO: INICIO
 # ==========================================
-if modulo == "Inicio y Presentación":
-    st.title("📡 Plataforma Educativa y Simulador de Radiopropagación")
-    st.subheader("Proyecto Práctico - Pedagógico (Etapa 2: Profundización)")
+if modulo == "Inicio":
+    st.title("📡 Plataforma Educativa y Simulador de Antenas y Propagación")
+    st.subheader("Proyecto Práctico - Pedagógico")
     st.markdown("""
-    Bienvenida a tu simulador técnico. Esta herramienta está diseñada para procesar, calcular y graficar 
+    Bienvenid@ mi nombre es Laura Perez, estudiante de Ingenieria de Telecomunicaciones. Esta herramienta está diseñada para procesar, calcular y graficar 
     los fenómenos clave de las telecomunicaciones y la propagación de ondas electromagnéticas.
     
     ### Instrucciones:
