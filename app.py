@@ -15,37 +15,39 @@ def cargar_fondo_local(archivo_imagen):
     try:
         with open(archivo_imagen, "rb") as image_file:
             encoded_string = base64.b64encode(image_file.read()).decode()
-
-        # Código CSS para aplicar el fondo de pantalla completo con opacidad/capa oscura
+        
+        # --- CÓDIGO CSS MODIFICADO ---
         css_fondo = f"""
         <style>
         .stApp {{
-            background-image: linear-gradient(rgba(240, 242, 246, 0.85), rgba(240, 242, 246, 0.85)),
-                             url("data:image/jpg;base64,{encoded_string}");
+            # Colocamos una capa negra translúcida (0.75 de opacidad) sobre la imagen
+            background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), 
+                             url("data:image/png;base64,{encoded_string}");
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             background-attachment: fixed;
         }}
-
-        /* Estilo pro para las tarjetas de resultados (Métricas) */
-        .stMetric {{
-            background-color: rgba(255, 255, 255, 0.9) !important;
-            padding: 15px;
+        
+        # Hacemos las tarjetas de variables y gráficos ligeramente más oscuras y legibles
+        .stMetric, .stSlider, .stNumberInput, .stSelectbox, .stExpander {{
+            background-color: rgba(20, 20, 30, 0.8) !important;
             border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }}
 
-        /* Cambiar ligeramente el color de los títulos para que contrasten */
-        h1, h2, h3 {{ color: #0F172A; }}
+        # Forzamos que todos los textos principales sean blanco puro para máximo contraste
+        h1, h2, h3, p, span, label {{
+            color: #FFFFFF !important;
+        }}
         </style>
         """
         st.markdown(css_fondo, unsafe_allow_html=True)
     except FileNotFoundError:
-        # Si aún no has descargado la imagen, el programa no se romperá
-        st.warning(f"⚠️ No se encontró el archivo '{archivo_imagen}' en la carpeta. Agrega tu imagen generada por IA para ver el fondo.")
+        st.warning(f"⚠️ No se encontró el archivo '{archivo_imagen}'. Asegúrate de guardarlo en la misma carpeta.")
 
-# Llamamos a la función. Reemplaza 'fondo.jpg' por el nombre exacto de tu imagen
+# Llamamos a la función (asegúrate de que el nombre sea correcto)
 cargar_fondo_local("antenas.png")
 
 # ==========================================
