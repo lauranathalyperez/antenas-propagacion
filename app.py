@@ -15,10 +15,10 @@ def cargar_fondo_local(archivo_imagen):
     try:
         with open(archivo_imagen, "rb") as image_file:
             encoded_string = base64.b64encode(image_file.read()).decode()
-        
+
         css_fondo = f"""
         <style>
-        /* 1. Fondo con la capa negra muy suave (solo 0.4 de opacidad) para que la IA se vea clara */
+        /* 1. Fondo general */
         .stApp {{
             background-image: linear-gradient(rgba(15, 23, 42, 0.4), rgba(15, 23, 42, 0.4)), 
                              url("data:image/png;base64,{encoded_string}");
@@ -28,8 +28,8 @@ def cargar_fondo_local(archivo_imagen):
             background-attachment: fixed;
         }}
         
-        /* 2. El TRUCO: Contenedores con fondo oscuro sólido para proteger la lectura del texto */
-        .stMetric, .stSlider, .stNumberInput, .stSelectbox, .stExpander, [data-testid="stMarkdownContainer"] {{
+        /* 2. El TRUCO CORREGIDO: Evita que la barra lateral cree recuadros oscuros molestos */
+        main .stMetric, main .stSlider, main .stNumberInput, main .stSelectbox, main .stExpander, main [data-testid="stMarkdownContainer"] {{
             background-color: rgba(15, 23, 42, 0.85) !important;
             border-radius: 12px;
             padding: 15px;
@@ -37,12 +37,12 @@ def cargar_fondo_local(archivo_imagen):
             border: 1px solid rgba(255, 255, 255, 0.1);
         }}
 
-        /* 3. Forzar texto blanco dentro de los bloques de contenido */
+        /* 3. Forzar texto blanco */
         h1, h2, h3, p, span, label, div {{
             color: #FFFFFF !important;
         }}
         
-        /* Ajuste para que los textos de los gráficos no se dañen */
+        /* Ajuste para los gráficos */
         .js-plotly-plot .main-svg text {{
             fill: #FFFFFF !important;
         }}
@@ -292,17 +292,33 @@ elif modulo == "6. Presupuesto de Enlace (Link Budget)":
             st.error("🔴 ¡ENLACE INVIABLE! La señal se pierde en el camino y no llega con suficiente fuerza.")
 
 # ==========================================
-# MÓDULO 7: ANTENAS (VISTA DUAL 2D Y 3D)
+# MÓDULO 7: ANTENAS (VISTA DUAL CON DESCRIPCIÓN)
 # ==========================================
 elif modulo == "7. Visualización de Antenas":
     st.title("📡 7. Diseño e Integración de Antenas (Vista Dual)")
     
-    with st.expander("📖 Teoría"):
+    with st.expander("📖 Módulo Educativo: Fundamento Teórico"):
         st.write("El análisis de antenas se realiza en dos planos principales:")
         st.write("- **Vista 2D (Polar):** Muestra el corte transversal del haz.")
         st.write("- **Vista 3D (Espacial):** Muestra cómo se distribuye la energía en todo el espacio real.")
 
     tipo_antena = st.selectbox("Seleccione el Tipo de Antena:", ["Dipolo de Media Onda", "Antena Parabólica Direccional"])
+
+    # --- DESCRIPCIONES DE LAS ANTENAS ---
+    if tipo_antena == "Dipolo de Media Onda":
+        st.markdown("""
+        ### 🔹 Dipolo de Media Onda ($\lambda/2$)
+        * **Descripción:** Es la antena más fundamental en telecomunicaciones. Consiste en dos conductores alineados con una longitud total igual a la mitad de la longitud de onda de la señal transmitida.
+        * **Comportamiento Electromagnético:** Su patrón de radiación es **omni-direccional** en el plano horizontal (forma de rosquilla o toroide en 3D). Esto significa que distribuye la señal con la misma fuerza hacia los lados (360 grados), pero tiene un "nulo de radiación" (cero señal) justo en los extremos superior e inferior (Eje Z).
+        * **Uso Común:** Torres de radio FM, antenas de routers Wi-Fi domésticos y sistemas de comunicaciones móviles donde se requiere cobertura general en un área.
+        """)
+    else:
+        st.markdown("""
+        ### 🔹 Antena Parabólica Direccional
+        * **Descripción:** Es un sistema compuesto por un alimentador (foco) y un reflector parabólico metálico que concentra las ondas en una sola dirección.
+        * **Comportamiento Electromagnético:** Actúa de forma similar a un reflector de linterna, tomando la energía dispersa y unificándola en un **haz sumamente estrecho y de alta ganancia (Directivo)**. Minimiza el desperdicio de energía hacia los lados y concentra los lóbulos secundarios para lograr una máxima eficiencia en el eje de apuntamiento.
+        * **Uso Común:** Radioenlaces de microondas punto a punto de larga distancia, estaciones terrenas satelitales (DirecTV, Starlink) y radares.
+        """)
 
     tab1, tab2 = st.tabs(["📊 Gráfico Polar 2D", "🧊 Modelado Espacial 3D"])
 
@@ -314,14 +330,11 @@ elif modulo == "7. Visualización de Antenas":
     if tipo_antena == "Dipolo de Media Onda":
         r_2d = np.abs(np.sin(theta_2d))
         R_3d = np.abs(np.sin(THETA))
-        descripcion = "El dipolo radia energía perpendicularmente a su eje, creando un patrón omnidireccional en el plano horizontal."
     else:
         r_2d = np.exp(-15 * (theta_2d - np.pi)**2) + 0.02
         R_3d = np.exp(-15 * ((THETA - np.pi/2)**2 + (PHI - np.pi)**2)) + 0.05
-        descripcion = "La parábola concentra la energía en un haz muy fino para radioenlaces de larga distancia."
 
     with tab1:
-        st.write(f"**Análisis de Corte Transversal:** {descripcion}")
         fig_2d = go.Figure(data=go.Scatterpolar(
             r=r_2d, theta=np.degrees(theta_2d), mode='lines', 
             line_color='#00F2FF', fill='toself', fillcolor='rgba(0, 242, 255, 0.2)'
@@ -334,7 +347,6 @@ elif modulo == "7. Visualización de Antenas":
         st.plotly_chart(fig_2d, use_container_width=True)
 
     with tab2:
-        st.write("**Análisis Volumétrico:** Rota el gráfico para explorar el lóbulo principal.")
         X = R_3d * np.sin(THETA) * np.cos(PHI)
         Y = R_3d * np.sin(THETA) * np.sin(PHI)
         Z = R_3d * np.cos(THETA)
