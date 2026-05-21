@@ -94,7 +94,7 @@ if modulo == "Introducción":
 elif modulo == "1. Propagación en Espacio Libre":
     st.title("✨ 1. Propagación en Espacio Libre (Friis)")
     
-    with st.expander("📖 Módulo Educativo: Fundamento Teórico"):
+    with st.expander("📖 Teoría"):
         st.write("El modelo de pérdidas en espacio libre (FSPL) asume una antena isotrópica radiando en un ambiente ideal sin obstáculos.")
         st.latex(r"FSPL (dB) = 32.44 + 20\log_{10}(d_{km}) + 20\log_{10}(f_{MHz})")
 
@@ -121,7 +121,7 @@ elif modulo == "1. Propagación en Espacio Libre":
 elif modulo == "2. Atenuación por Lluvia":
     st.title("🌧️ 2. Atenuación por Lluvia e Hidrometeoro")
     
-    with st.expander("📖 Módulo Educativo: Fundamento Teórico"):
+    with st.expander("📖 Teoría"):
         st.write("A frecuencias altas (mayores a 10 GHz), las gotas de lluvia absorben y dispersan la energía de la onda.")
         st.latex(r"\gamma = k \cdot R^\alpha \quad [dB/km]")
         st.caption("Donde R es la tasa de lluvia en mm/h, y k, alpha dependen de la frecuencia.")
@@ -154,7 +154,7 @@ elif modulo == "2. Atenuación por Lluvia":
 elif modulo == "3. Ruido Térmico y SNR":
     st.title("🔊 3. Ruido Térmico y Factor de Ruido")
     
-    with st.expander("📖 Módulo Educativo: Fundamento Teórico"):
+    with st.expander("📖 Teoría"):
         st.write("El ruido térmico o ruido de Johnson-Nyquist es inevitable debido a la agitación de electrones.")
         st.latex(r"N = k \cdot T \cdot B \quad [Watts]")
         st.write("Donde $k = 1.38 \times 10^{-23}$ J/K, $T$ es temperatura en Kelvin y $B$ es Ancho de Banda en Hz.")
@@ -184,7 +184,7 @@ elif modulo == "3. Ruido Térmico y SNR":
 elif modulo == "4. Reflexión y Ley de Snell":
     st.title("🪞 4. Reflexión y Refracción (Leyes de Snell)")
     
-    with st.expander("📖 Módulo Educativo: Fundamento Teórico"):
+    with st.expander("📖 Teoría"):
         st.write("Cuando una onda cambia de medio, una parte se refleja (rebota) y otra se refracta (se transmite desviándose).")
         st.latex(r"n_1 \cdot \sin(\theta_1) = n_2 \cdot \sin(\theta_2)")
 
@@ -225,7 +225,7 @@ elif modulo == "4. Reflexión y Ley de Snell":
 elif modulo == "5. Onda de Espacio (Tierra Curva)":
     st.title("🌍 5. Propagación por Onda de Espacio (Efecto Tierra Curva)")
     
-    with st.expander("📖 Módulo Educativo: Fundamento Teórico"):
+    with st.expander("📖 Teoría"):
         st.write("Debido a la curvatura de la Tierra, las antenas deben tener una altura mínima para poder 'verse'.")
         st.latex(r"d_{max} = \sqrt{17 \cdot k \cdot h_1} + \sqrt{17 \cdot k \cdot h_2} \quad [km]")
         st.caption("Donde h1 y h2 son las alturas en metros, y k es el factor de modificación del radio terrestre (típicamente 4/3).")
@@ -259,7 +259,7 @@ elif modulo == "5. Onda de Espacio (Tierra Curva)":
 elif modulo == "6. Presupuesto de Enlace (Link Budget)":
     st.title("📊 6. Cálculo de Propagación (Link Budget Completo)")
     
-    with st.expander("📖 Módulo Educativo: Fundamento Teórico"):
+    with st.expander("📖 Teoría"):
         st.write("El presupuesto de enlace reúne todas las ganancias y pérdidas desde el transmisor hasta el receptor.")
         st.latex(r"P_{Rx} = P_{Tx} + G_{Tx} + G_{Rx} - FSPL - Atenuaciones_{Extra}")
 
@@ -297,7 +297,7 @@ elif modulo == "6. Presupuesto de Enlace (Link Budget)":
 elif modulo == "7. Visualización de Antenas":
     st.title("📡 7. Diseño e Integración de Antenas (Vista Dual)")
     
-    with st.expander("📖 Módulo Educativo: Fundamento Teórico"):
+    with st.expander("📖 Teoría"):
         st.write("El análisis de antenas se realiza en dos planos principales:")
         st.write("- **Vista 2D (Polar):** Muestra el corte transversal del haz.")
         st.write("- **Vista 3D (Espacial):** Muestra cómo se distribuye la energía en todo el espacio real.")
