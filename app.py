@@ -297,7 +297,7 @@ elif modulo == "6. Presupuesto de Enlace (Link Budget)":
 elif modulo == "7. Visualización de Antenas":
     st.title("📡 7. Diseño e Integración de Antenas (Vista Dual)")
     
-    with st.expander("📖 Módulo Educativo: Fundamento Teórico"):
+    with st.expander("📖 Teoría"):
         st.write("El análisis de antenas se realiza en dos planos principales:")
         st.write("- **Vista 2D (Polar):** Muestra el corte transversal del haz.")
         st.write("- **Vista 3D (Espacial):** Muestra cómo se distribuye la energía en todo el espacio real.")
