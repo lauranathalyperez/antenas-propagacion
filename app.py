@@ -16,12 +16,11 @@ def cargar_fondo_local(archivo_imagen):
         with open(archivo_imagen, "rb") as image_file:
             encoded_string = base64.b64encode(image_file.read()).decode()
         
-        # --- CÓDIGO CSS MODIFICADO ---
         css_fondo = f"""
         <style>
+        /* 1. Fondo con la capa negra muy suave (solo 0.4 de opacidad) para que la IA se vea clara */
         .stApp {{
-            # Colocamos una capa negra translúcida (0.75 de opacidad) sobre la imagen
-            background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), 
+            background-image: linear-gradient(rgba(15, 23, 42, 0.4), rgba(15, 23, 42, 0.4)), 
                              url("data:image/png;base64,{encoded_string}");
             background-size: cover;
             background-position: center;
@@ -29,17 +28,23 @@ def cargar_fondo_local(archivo_imagen):
             background-attachment: fixed;
         }}
         
-        # Hacemos las tarjetas de variables y gráficos ligeramente más oscuras y legibles
-        .stMetric, .stSlider, .stNumberInput, .stSelectbox, .stExpander {{
-            background-color: rgba(20, 20, 30, 0.8) !important;
-            border-radius: 10px;
-            padding: 10px;
+        /* 2. El TRUCO: Contenedores con fondo oscuro sólido para proteger la lectura del texto */
+        .stMetric, .stSlider, .stNumberInput, .stSelectbox, .stExpander, [data-testid="stMarkdownContainer"] {{
+            background-color: rgba(15, 23, 42, 0.85) !important;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 10px;
             border: 1px solid rgba(255, 255, 255, 0.1);
         }}
 
-        # Forzamos que todos los textos principales sean blanco puro para máximo contraste
-        h1, h2, h3, p, span, label {{
+        /* 3. Forzar texto blanco dentro de los bloques de contenido */
+        h1, h2, h3, p, span, label, div {{
             color: #FFFFFF !important;
+        }}
+        
+        /* Ajuste para que los textos de los gráficos no se dañen */
+        .js-plotly-plot .main-svg text {{
+            fill: #FFFFFF !important;
         }}
         </style>
         """
@@ -47,7 +52,7 @@ def cargar_fondo_local(archivo_imagen):
     except FileNotFoundError:
         st.warning(f"⚠️ No se encontró el archivo '{archivo_imagen}'. Asegúrate de guardarlo en la misma carpeta.")
 
-# Llamamos a la función (asegúrate de que el nombre sea correcto)
+# Llamamos a la función
 cargar_fondo_local("antenas.png")
 
 # ==========================================
