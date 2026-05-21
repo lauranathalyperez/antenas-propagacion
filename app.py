@@ -294,6 +294,7 @@ elif modulo == "6. Presupuesto de Enlace (Link Budget)":
 # ==========================================
 # MÓDULO 7: ANTENAS (VERSIÓN 3D OPTIMIZADA)
 # ==========================================
+
 elif modulo == "7. Visualización de Antenas":
     st.title("📡 7. Diseño e Integración de Antenas (Vista Dual)")
     
