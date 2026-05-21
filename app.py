@@ -292,179 +292,56 @@ elif modulo == "6. Presupuesto de Enlace (Link Budget)":
             st.error("🔴 ¡ENLACE INVIABLE! La señal se pierde en el camino y no llega con suficiente fuerza.")
 
 # ==========================================
-# MÓDULO 7: ANTENAS (VERSIÓN 3D OPTIMIZADA)
+# MÓDULO 7: ANTENAS (VISTA DUAL 2D Y 3D)
 # ==========================================
-
 elif modulo == "7. Visualización de Antenas":
     st.title("📡 7. Diseño e Integración de Antenas (Vista Dual)")
     
     with st.expander("📖 Módulo Educativo: Fundamento Teórico"):
         st.write("El análisis de antenas se realiza en dos planos principales:")
-        st.write("- **Vista 2D (Polar):** Muestra el corte transversal del haz. Es ideal para medir el ancho de banda de mitad de potencia (HPBW).")
+        st.write("- **Vista 2D (Polar):** Muestra el corte transversal del haz.")
         st.write("- **Vista 3D (Espacial):** Muestra cómo se distribuye la energía en todo el espacio real.")
-
-    st.info("💡 Selecciona una antena y navega entre las pestañas para ver las diferentes representaciones.")
 
     tipo_antena = st.selectbox("Seleccione el Tipo de Antena:", ["Dipolo de Media Onda", "Antena Parabólica Direccional"])
 
-    # --- CREACIÓN DE PESTAÑAS (TABS) ---
     tab1, tab2 = st.tabs(["📊 Gráfico Polar 2D", "🧊 Modelado Espacial 3D"])
 
-    # ==========================================
-    # LÓGICA DE DATOS (COMÚN PARA AMBAS VISTAS)
-    # ==========================================
     theta_2d = np.linspace(0, 2*np.pi, 500)
-    
-    # Datos para 3D
     t = np.linspace(0, np.pi, 60)
     p = np.linspace(0, 2*np.pi, 60)
     THETA, PHI = np.meshgrid(t, p)
 
     if tipo_antena == "Dipolo de Media Onda":
-        # Forma de 8 en 2D y Rosquilla en 3D
         r_2d = np.abs(np.sin(theta_2d))
         R_3d = np.abs(np.sin(THETA))
         descripcion = "El dipolo radia energía perpendicularmente a su eje, creando un patrón omnidireccional en el plano horizontal."
     else:
-        # Lóbulo estrecho para la parabólica
         r_2d = np.exp(-15 * (theta_2d - np.pi)**2) + 0.02
         R_3d = np.exp(-15 * ((THETA - np.pi/2)**2 + (PHI - np.pi)**2)) + 0.05
         descripcion = "La parábola concentra la energía en un haz muy fino para radioenlaces de larga distancia."
 
-    # ==========================================
-    # PESTAÑA 1: VISTA 2D
-    # ==========================================
     with tab1:
         st.write(f"**Análisis de Corte Transversal:** {descripcion}")
         fig_2d = go.Figure(data=go.Scatterpolar(
-            r=r_2d, 
-            theta=np.degrees(theta_2d), 
-            mode='lines', 
-            line_color='#00F2FF', # Color Cyan tecnológico
-            fill='toself',
-            fillcolor='rgba(0, 242, 255, 0.2)'
+            r=r_2d, theta=np.degrees(theta_2d), mode='lines', 
+            line_color='#00F2FF', fill='toself', fillcolor='rgba(0, 242, 255, 0.2)'
         ))
         fig_2d.update_layout(
             polar=dict(radialaxis=dict(visible=True, gridcolor="rgba(255,255,255,0.2)"),
                        angularaxis=dict(gridcolor="rgba(255,255,255,0.2)")),
-            showlegend=False,
-            paper_bgcolor='rgba(0,0,0,0)',
-            plot_bgcolor='rgba(0,0,0,0)',
-            font=dict(color="white")
+            showlegend=False, paper_bgcolor='rgba(0,0,0,0)', font=dict(color="white")
         )
         st.plotly_chart(fig_2d, use_container_width=True)
 
-    # ==========================================
-    # PESTAÑA 2: VISTA 3D
-    # ==========================================
     with tab2:
         st.write("**Análisis Volumétrico:** Rota el gráfico para explorar el lóbulo principal.")
-        
-        # Conversión a cartesianas
         X = R_3d * np.sin(THETA) * np.cos(PHI)
         Y = R_3d * np.sin(THETA) * np.sin(PHI)
         Z = R_3d * np.cos(THETA)
 
-        fig_3d = go.Figure(data=[go.Surface(
-            x=X, y=Y, z=Z, 
-            colorscale='Viridis', 
-            colorbar=dict(title="Ganancia", tickfont=dict(color="white"))
-        )])
-
+        fig_3d = go.Figure(data=[go.Surface(x=X, y=Y, z=Z, colorscale='Viridis', colorbar=dict(title="Ganancia", tickfont=dict(color="white")))])
         fig_3d.update_layout(
-            scene=dict(
-                xaxis=dict(title='X', gridcolor='gray', showbackground=False),
-                yaxis=dict(title='Y', gridcolor='gray', showbackground=False),
-                zaxis=dict(title='Z', gridcolor='gray', showbackground=False)
-            ),
-            paper_bgcolor='rgba(0,0,0,0)',
-            margin=dict(l=0, r=0, b=0, t=0),
-            height=600
-        )
-        st.plotly_chart(fig_3d, use_container_width=True)elif modulo == "7. Visualización de Antenas":
-    st.title("📡 7. Diseño e Integración de Antenas (Vista Dual)")
-    
-    with st.expander("📖 Módulo Educativo: Fundamento Teórico"):
-        st.write("El análisis de antenas se realiza en dos planos principales:")
-        st.write("- **Vista 2D (Polar):** Muestra el corte transversal del haz. Es ideal para medir el ancho de banda de mitad de potencia (HPBW).")
-        st.write("- **Vista 3D (Espacial):** Muestra cómo se distribuye la energía en todo el espacio real.")
-
-    st.info("💡 Selecciona una antena y navega entre las pestañas para ver las diferentes representaciones.")
-
-    tipo_antena = st.selectbox("Seleccione el Tipo de Antena:", ["Dipolo de Media Onda", "Antena Parabólica Direccional"])
-
-    # --- CREACIÓN DE PESTAÑAS (TABS) ---
-    tab1, tab2 = st.tabs(["📊 Gráfico Polar 2D", "🧊 Modelado Espacial 3D"])
-
-    # ==========================================
-    # LÓGICA DE DATOS (COMÚN PARA AMBAS VISTAS)
-    # ==========================================
-    theta_2d = np.linspace(0, 2*np.pi, 500)
-    
-    # Datos para 3D
-    t = np.linspace(0, np.pi, 60)
-    p = np.linspace(0, 2*np.pi, 60)
-    THETA, PHI = np.meshgrid(t, p)
-
-    if tipo_antena == "Dipolo de Media Onda":
-        # Forma de 8 en 2D y Rosquilla en 3D
-        r_2d = np.abs(np.sin(theta_2d))
-        R_3d = np.abs(np.sin(THETA))
-        descripcion = "El dipolo radia energía perpendicularmente a su eje, creando un patrón omnidireccional en el plano horizontal."
-    else:
-        # Lóbulo estrecho para la parabólica
-        r_2d = np.exp(-15 * (theta_2d - np.pi)**2) + 0.02
-        R_3d = np.exp(-15 * ((THETA - np.pi/2)**2 + (PHI - np.pi)**2)) + 0.05
-        descripcion = "La parábola concentra la energía en un haz muy fino para radioenlaces de larga distancia."
-
-    # ==========================================
-    # PESTAÑA 1: VISTA 2D
-    # ==========================================
-    with tab1:
-        st.write(f"**Análisis de Corte Transversal:** {descripcion}")
-        fig_2d = go.Figure(data=go.Scatterpolar(
-            r=r_2d, 
-            theta=np.degrees(theta_2d), 
-            mode='lines', 
-            line_color='#00F2FF', # Color Cyan tecnológico
-            fill='toself',
-            fillcolor='rgba(0, 242, 255, 0.2)'
-        ))
-        fig_2d.update_layout(
-            polar=dict(radialaxis=dict(visible=True, gridcolor="rgba(255,255,255,0.2)"),
-                       angularaxis=dict(gridcolor="rgba(255,255,255,0.2)")),
-            showlegend=False,
-            paper_bgcolor='rgba(0,0,0,0)',
-            plot_bgcolor='rgba(0,0,0,0)',
-            font=dict(color="white")
-        )
-        st.plotly_chart(fig_2d, use_container_width=True)
-
-    # ==========================================
-    # PESTAÑA 2: VISTA 3D
-    # ==========================================
-    with tab2:
-        st.write("**Análisis Volumétrico:** Rota el gráfico para explorar el lóbulo principal.")
-        
-        # Conversión a cartesianas
-        X = R_3d * np.sin(THETA) * np.cos(PHI)
-        Y = R_3d * np.sin(THETA) * np.sin(PHI)
-        Z = R_3d * np.cos(THETA)
-
-        fig_3d = go.Figure(data=[go.Surface(
-            x=X, y=Y, z=Z, 
-            colorscale='Viridis', 
-            colorbar=dict(title="Ganancia", tickfont=dict(color="white"))
-        )])
-
-        fig_3d.update_layout(
-            scene=dict(
-                xaxis=dict(title='X', gridcolor='gray', showbackground=False),
-                yaxis=dict(title='Y', gridcolor='gray', showbackground=False),
-                zaxis=dict(title='Z', gridcolor='gray', showbackground=False)
-            ),
-            paper_bgcolor='rgba(0,0,0,0)',
-            margin=dict(l=0, r=0, b=0, t=0),
-            height=600
+            scene=dict(xaxis=dict(title='X', showbackground=False), yaxis=dict(title='Y', showbackground=False), zaxis=dict(title='Z', showbackground=False)),
+            paper_bgcolor='rgba(0,0,0,0)', margin=dict(l=0, r=0, b=0, t=0), height=600
         )
         st.plotly_chart(fig_3d, use_container_width=True)
