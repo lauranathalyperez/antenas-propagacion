@@ -46,34 +46,11 @@ def cargar_fondo_local(archivo_imagen):
         .js-plotly-plot .main-svg text {{
             fill: #FFFFFF !important;
         }}
-
-        /* Clases de utilidad para las infografías en 4 cuadrantes */
-        .info-card {{
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 15px;
-            min-height: 250px;
-            border: 2px solid;
-        }}
-        .card-title {{
-            font-size: 18px;
-            font-weight: bold;
-            margin-top: 0px;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            text-transform: uppercase;
-        }}
-        .card-body {{
-            font-size: 14px;
-            line-height: 1.5;
-        }}
         </style>
         """
         st.markdown(css_fondo, unsafe_allow_html=True)
     except FileNotFoundError:
-        st.warning(f"⚠️ No se encontró el archivo '{archivo_imagen}'. Asegúrate de guardarlo en la misma carpeta.")
+        st.warning(f"⚠️ No se encontró el archivo de fondo '{archivo_imagen}'. Asegúrate de guardarlo en la misma carpeta.")
 
 # Llamamos a la función de fondo
 cargar_fondo_local("antenas.png")
@@ -106,65 +83,16 @@ if modulo == "Introducción":
 
     ### Instrucciones:
     1. Usa el menú de la izquierda para navegar por los *7 ejes temáticos*.
-    2. En cada módulo encontrarás una **Infografía Estructurada en 4 Cuadrantes** Basada en Modelos de Estudio Detallado (Concepto, Dependencias, Fórmulas y Casos de Uso) junto a su respectivo **Simulador en Tiempo Real**.
+    2. En cada módulo encontrarás una **Infografía Técnica en Alta Definición** (Concepto, Dependencias, Fórmulas y Casos de Uso) cargada estáticamente junto a su respectivo **Simulador en Tiempo Real**.
     """)
-    st.info("💡 Desarrollado en Python utilizando Streamlit, Numpy y Plotly de forma nativa con inyección de layouts dinámicos en CSS.")
+    st.info("💡 Desarrollado en Python utilizando Streamlit, Numpy y Plotly de forma nativa.")
 
 # ==========================================
 # MÓDULO 1: ESPACIO LIBRE
 # ==========================================
 elif modulo == "1. Propagación en Espacio Libre":
     st.title("✨ 1.0 ESTUDIO DETALLADO: PROPAGACIÓN EN ESPACIO LIBRE (Friis)")
-    st.markdown("### 📊 INFOGRAFÍA DINÁMICA DEL SISTEMA")
-    
-    c1, c2 = st.columns(2)
-    with c1:
-        st.markdown("""
-            <div class="info-card" style="background-color: rgba(0, 150, 255, 0.1); border-color: #0096FF;">
-                <div class="card-title" style="color: #0096FF !important;">📡 CONCEPTO</div>
-                <div class="card-body">
-                    <ul>
-                        <li><b>Modelado de pérdidas:</b> Cuantifica la disminución de la densidad de potencia de la onda conforme viaja.</li>
-                        <li><b>Medio Ideal:</b> Considera un vacío absoluto sin obstáculos, gases ni atenuación atmosférica.</li>
-                        <li><b>Sin interferencias:</b> La señal se propaga de manera limpia desde una antena isotrópica teórica.</li>
-                    </ul>
-                </div>
-            </div>""", unsafe_allow_html=True)
-    with c2:
-        st.markdown("""
-            <div class="info-card" style="background-color: rgba(255, 165, 0, 0.1); border-color: #FFA500;">
-                <div class="card-title" style="color: #FFA500 !important;">⚠️ DEPENDENCIAS</div>
-                <div class="card-body">
-                    <p>La atenuación del trayecto en espacio libre (FSPL) es directamente proporcional a:</p>
-                    <ul>
-                        <li><b>Distancia al cuadrado:</b> Al duplicar la distancia, las pérdidas se cuadruplican.</li>
-                        <li><b>Frecuencia al cuadrado:</b> Frecuencias más altas sufren mayor atenuación en la apertura del receptor.</li>
-                    </ul>
-                </div>
-            </div>""", unsafe_allow_html=True)
-
-    c3, c4 = st.columns(2)
-    with c3:
-        st.markdown("""
-            <div class="info-card" style="background-color: rgba(0, 200, 100, 0.1); border-color: #00C864;">
-                <div class="card-title" style="color: #00C864 !important;">🧮 FÓRMULA MATEMÁTICA</div>
-                <div class="card-body">
-                    <p>Cálculo práctico de pérdidas en decibelios (dB):</p>
-                </div>
-            </div>""", unsafe_allow_html=True)
-        st.latex(r"FSPL(dB) = 32.44 + 20\log_{10}(f_{MHz}) + 20\log_{10}(d_{km})")
-    with c4:
-        st.markdown("""
-            <div class="info-card" style="background-color: rgba(150, 0, 200, 0.1); border-color: #9600C8;">
-                <div class="card-title" style="color: #9600C8 !important;">🚀 USOS Y APLICACIONES</div>
-                <div class="card-body">
-                    <ul>
-                        <li><b>A. Enlace Satelital:</b> Análisis de trayectorias espaciales (Satélite a Tierra).</li>
-                        <li><b>B. Telemetría Dron:</b> Conectividad LOS (Línea de vista) entre estaciones base y UAVs.</li>
-                        <li><b>C. GPS / GNSS:</b> Recepción de señales desde órbitas MEO.</li>
-                    </ul>
-                </div>
-            </div>""", unsafe_allow_html=True)
+    st.image("infografia_modulo1.png", caption="Infografía de Soporte Técnico - Módulo 1", use_container_width=True)
 
     st.markdown("---")
     col1, col2 = st.columns([1, 2])
@@ -189,55 +117,7 @@ elif modulo == "1. Propagación en Espacio Libre":
 # ==========================================
 elif modulo == "2. Atenuación por Lluvia":
     st.title("🌧️ 2.0 ESTUDIO DETALLADO: ATENUACIÓN POR LLUVIA E HIDROMETEOROS")
-    st.markdown("### 📊 INFOGRAFÍA DINÁMICA DEL SISTEMA")
-    
-    c1, c2 = st.columns(2)
-    with c1:
-        st.markdown("""
-            <div class="info-card" style="background-color: rgba(0, 150, 255, 0.1); border-color: #0096FF;">
-                <div class="card-title" style="color: #0096FF !important;">🌧️ CONCEPTO</div>
-                <div class="card-body">
-                    <ul>
-                        <li><b>Absorción Electromagnética:</b> Las gotas de agua absorben energía resonante convirtiéndola en calor.</li>
-                        <li><b>Dispersión de Energía:</b> Las ondas chocan con las gotas redirigiéndose en múltiples trayectorias.</li>
-                        <li><b>Efecto de Longitud de Onda:</b> Crítico en bandas superiores a 10 GHz (Microondas y mmWave).</li>
-                    </ul>
-                </div>
-            </div>""", unsafe_allow_html=True)
-    with c2:
-        st.markdown("""
-            <div class="info-card" style="background-color: rgba(255, 165, 0, 0.1); border-color: #FFA500;">
-                <div class="card-title" style="color: #FFA500 !important;">⚠️ DEPENDENCIAS</div>
-                <div class="card-body">
-                    <ul>
-                        <li><b>Tasa de Precipitación (R):</b> Volumen e intensidad de la lluvia medido en mm/h.</li>
-                        <li><b>Coeficientes Geométricos (k, &alpha;):</b> Dependen de la frecuencia y la polarización (ITU-R P.838).</li>
-                    </ul>
-                </div>
-            </div>""", unsafe_allow_html=True)
-
-    c3, c4 = st.columns(2)
-    with c3:
-        st.markdown("""
-            <div class="info-card" style="background-color: rgba(0, 200, 100, 0.1); border-color: #00C864;">
-                <div class="card-title" style="color: #00C864 !important;">🧮 FÓRMULA MATEMÁTICA</div>
-                <div class="card-body">
-                    <p>Atenuación específica por kilómetro lineal:</p>
-                </div>
-            </div>""", unsafe_allow_html=True)
-        st.latex(r"\gamma = k \cdot R^\alpha \quad [dB/km] \qquad A_{total} = \gamma \cdot d")
-    with c4:
-        st.markdown("""
-            <div class="info-card" style="background-color: rgba(150, 0, 200, 0.1); border-color: #9600C8;">
-                <div class="card-title" style="color: #9600C8 !important;">🚀 USOS Y APLICACIONES</div>
-                <div class="card-body">
-                    <ul>
-                        <li><b>A. Enlaces Troncales:</b> Dimensionamiento de disponibilidad en bandas K/Ku.</li>
-                        <li><b>B. Conectividad 5G:</b> Planeación de celdas pequeñas de ondas milimétricas.</li>
-                        <li><b>C. Televisión Satelital (DTH):</b> Cálculo del factor de caída de señal (Rain Fade).</li>
-                    </ul>
-                </div>
-            </div>""", unsafe_allow_html=True)
+    st.image("infografia_modulo2.png", caption="Infografía de Soporte Técnico - Módulo 2", use_container_width=True)
 
     st.markdown("---")
     col1, col2 = st.columns([1, 2])
@@ -266,56 +146,7 @@ elif modulo == "2. Atenuación por Lluvia":
 # ==========================================
 elif modulo == "3. Ruido Térmico y SNR":
     st.title("🔊 3.0 ESTUDIO DETALLADO: RUIDO TÉRMICO Y SENSIBILIDAD")
-    st.markdown("### 📊 INFOGRAFÍA DINÁMICA DEL SISTEMA")
-    
-    c1, c2 = st.columns(2)
-    with c1:
-        st.markdown("""
-            <div class="info-card" style="background-color: rgba(0, 150, 255, 0.1); border-color: #0096FF;">
-                <div class="card-title" style="color: #0096FF !important;">🌡️ CONCEPTO</div>
-                <div class="card-body">
-                    <ul>
-                        <li><b>Ruido de Johnson-Nyquist:</b> Generado por la agitación estocástica de portadores de carga eléctrica.</li>
-                        <li><b>Ruido Blanco:</b> Espectralmente uniforme, afecta por igual a todas las frecuencias del canal.</li>
-                        <li><b>Límite Físico Fundamental:</b> Dictamina el piso mínimo de potencia detectable.</li>
-                    </ul>
-                </div>
-            </div>""", unsafe_allow_html=True)
-    with c2:
-        st.markdown("""
-            <div class="info-card" style="background-color: rgba(255, 165, 0, 0.1); border-color: #FFA500;">
-                <div class="card-title" style="color: #FFA500 !important;">⚠️ DEPENDENCIAS</div>
-                <div class="card-body">
-                    <p>La potencia del ruido térmico responde linealmente ante:</p>
-                    <ul>
-                        <li><b>Ancho de Banda (B):</b> Canales más anchos recolectan más potencia de ruido.</li>
-                        <li><b>Temperatura Absoluta (T):</b> Incrementa las fluctuaciones eléctricas moleculares.</li>
-                    </ul>
-                </div>
-            </div>""", unsafe_allow_html=True)
-
-    c3, c4 = st.columns(2)
-    with c3:
-        st.markdown("""
-            <div class="info-card" style="background-color: rgba(0, 200, 100, 0.1); border-color: #00C864;">
-                <div class="card-title" style="color: #00C864 !important;">🧮 FÓRMULA MATEMÁTICA</div>
-                <div class="card-body">
-                    <p>Potencia absoluta de ruido y conversión logarítmica (dBm):</p>
-                </div>
-            </div>""", unsafe_allow_html=True)
-        st.latex(r"N = k \cdot T \cdot B \quad [W] \qquad N_{dBm} = -174 + 10\log_{10}(B_{Hz})")
-    with c4:
-        st.markdown("""
-            <div class="info-card" style="background-color: rgba(150, 0, 200, 0.1); border-color: #9600C8;">
-                <div class="card-title" style="color: #9600C8 !important;">🚀 USOS Y APLICACIONES</div>
-                <div class="card-body">
-                    <ul>
-                        <li><b>A. Redes LTE / 5G NR:</b> Establecimiento de los umbrales mínimos de recepción (Sensibilidad).</li>
-                        <li><b>B. Receptores de Radar:</b> Optimización del amplificador de bajo ruido (LNA).</li>
-                        <li><b>C. Radioastronomía:</b> Implementación de sistemas criogénicos extremos.</li>
-                    </ul>
-                </div>
-            </div>""", unsafe_allow_html=True)
+    st.image("infografia_modulo3.png", caption="Infografía de Soporte Técnico - Módulo 3", use_container_width=True)
 
     st.markdown("---")
     col1, col2 = st.columns([1, 2])
@@ -341,55 +172,7 @@ elif modulo == "3. Ruido Térmico y SNR":
 # ==========================================
 elif modulo == "4. Reflexión y Ley de Snell":
     st.title("🪞 4.0 ESTUDIO DETALLADO: FENÓMENOS DE INTERFAZ Y LEY DE SNELL")
-    st.markdown("### 📊 INFOGRAFÍA DINÁMICA DEL SISTEMA")
-
-    c1, c2 = st.columns(2)
-    with c1:
-        st.markdown("""
-            <div class="info-card" style="background-color: rgba(0, 150, 255, 0.1); border-color: #0096FF;">
-                <div class="card-title" style="color: #0096FF !important;">🪞 CONCEPTO</div>
-                <div class="card-body">
-                    <ul>
-                        <li><b>Cambio de Medio:</b> Modificación de la velocidad de fase de la onda electromagnética al cruzar fronteras físicas.</li>
-                        <li><b>Rayo Reflejado:</b> Energía devuelta al medio original bajo el mismo ángulo de incidencia.</li>
-                        <li><b>Rayo Refractado:</b> Energía desviada que penetra el nuevo medio variando su ángulo según los índices de refracción.</li>
-                    </ul>
-                </div>
-            </div>""", unsafe_allow_html=True)
-    with c2:
-        st.markdown("""
-            <div class="info-card" style="background-color: rgba(255, 165, 0, 0.1); border-color: #FFA500;">
-                <div class="card-title" style="color: #FFA500 !important;">⚠️ DEPENDENCIAS</div>
-                <div class="card-body">
-                    <ul>
-                        <li><b>Índice de Refracción (n):</b> Razón entre la velocidad de la luz en el vacío y en el medio en estudio.</li>
-                        <li><b>Ángulo de Incidencia (θ₁):</b> Geometría de choque de la onda con respecto a la línea normal de la superficie.</li>
-                    </ul>
-                </div>
-            </div>""", unsafe_allow_html=True)
-
-    c3, c4 = st.columns(2)
-    with c3:
-        st.markdown("""
-            <div class="info-card" style="background-color: rgba(0, 200, 100, 0.1); border-color: #00C864;">
-                <div class="card-title" style="color: #00C864 !important;">🧮 FÓRMULA MATEMÁTICA</div>
-                <div class="card-body">
-                    <p>Conservación del vector de onda en fronteras dieléctricas:</p>
-                </div>
-            </div>""", unsafe_allow_html=True)
-        st.latex(r"n_1 \cdot \sin(\theta_1) = n_2 \cdot \sin(\theta_2)")
-    with c4:
-        st.markdown("""
-            <div class="info-card" style="background-color: rgba(150, 0, 200, 0.1); border-color: #9600C8;">
-                <div class="card-title" style="color: #9600C8 !important;">🚀 USOS Y APLICACIONES</div>
-                <div class="card-body">
-                    <ul>
-                        <li><b>A. Guiado en Fibra Óptica:</b> Confinamiento de luz mediante Reflexión Interna Total.</li>
-                        <li><b>B. Propagación Ionosférica:</b> Reflexión de ondas de HF en las capas de la atmósfera superior.</li>
-                        <li><b>C. Radares Geotécnicos (GPR):</b> Detección de capas terrestres por cambio dieléctrico.</li>
-                    </ul>
-                </div>
-            </div>""", unsafe_allow_html=True)
+    st.image("infografia_modulo4.png", caption="Infografía de Soporte Técnico - Módulo 4", use_container_width=True)
 
     st.markdown("---")
     col1, col2 = st.columns([1, 2])
@@ -410,7 +193,7 @@ elif modulo == "4. Reflexión y Ley de Snell":
             theta2 = np.degrees(theta2_rad)
             st.metric("Ángulo de Refracción Resultante (θ₂)", f"{theta2:.2f} °")
 
-        # Configuración del objeto de Plotly con indentación estricta a 8 espacios
+        # Gráfico vectorial interactivo
         fig = go.Figure()
 
         # Rayo Incidente
@@ -452,55 +235,7 @@ elif modulo == "4. Reflexión y Ley de Snell":
 # ==========================================
 elif modulo == "5. Onda de Espacio (Tierra Curva)":
     st.title("🌍 5.0 ESTUDIO DETALLADO: ONDA DE ESPACIO Y CURVATURA TERRESTRE")
-    st.markdown("### 📊 INFOGRAFÍA DINÁMICA DEL SISTEMA")
-    
-    c1, c2 = st.columns(2)
-    with c1:
-        st.markdown("""
-            <div class="info-card" style="background-color: rgba(0, 150, 255, 0.1); border-color: #0096FF;">
-                <div class="card-title" style="color: #0096FF !important;">🌍 CONCEPTO</div>
-                <div class="card-body">
-                    <ul>
-                        <li><b>Horizonte de Radio:</b> Distancia máxima donde el rayo electromagnético roza tangencialmente el relieve terrestre.</li>
-                        <li><b>Onda de Espacio Directa:</b> Enlace punto a punto directo que viaja entre las estructuras aéreas de Tx y Rx.</li>
-                        <li><b>Bloqueo Geométrico:</b> La convexidad natural del planeta obstruye físicamente trayectorias muy largas.</li>
-                    </ul>
-                </div>
-            </div>""", unsafe_allow_html=True)
-    with c2:
-        st.markdown("""
-            <div class="info-card" style="background-color: rgba(255, 165, 0, 0.1); border-color: #FFA500;">
-                <div class="card-title" style="color: #FFA500 !important;">⚠️ DEPENDENCIAS</div>
-                <div class="card-body">
-                    <ul>
-                        <li><b>Alturas de Estructura (h₁, h₂):</b> Elevación física de los mástiles sobre el terreno plano.</li>
-                        <li><b>Factor de Radio Equivalente (K):</b> Ajuste matemático de refracción troposférica estándar (K=4/3).</li>
-                    </ul>
-                </div>
-            </div>""", unsafe_allow_html=True)
-
-    c3, c4 = st.columns(2)
-    with c3:
-        st.markdown("""
-            <div class="info-card" style="background-color: rgba(0, 200, 100, 0.1); border-color: #00C864;">
-                <div class="card-title" style="color: #00C864 !important;">🧮 FÓRMULA MATEMÁTICA</div>
-                <div class="card-body">
-                    <p>Rango de visibilidad LOS en Km considerando refracción atmosférica:</p>
-                </div>
-            </div>""", unsafe_allow_html=True)
-        st.latex(r"d_{max} = \sqrt{17 \cdot k \cdot h_1} + \sqrt{17 \cdot k \cdot h_2} \quad [km]")
-    with c4:
-        st.markdown("""
-            <div class="info-card" style="background-color: rgba(150, 0, 200, 0.1); border-color: #9600C8;">
-                <div class="card-title" style="color: #9600C8 !important;">🚀 USOS Y APLICACIONES</div>
-                <div class="card-body">
-                    <ul>
-                        <li><b>A. Radioenlaces Terrestres VHF/UHF:</b> Cálculo de la viabilidad de trayectorias.</li>
-                        <li><b>B. Despliegue de Radio Móvil:</b> Ubicación estratégica de torres de telefonía celular.</li>
-                        <li><b>C. Sistemas de Navegación Aérea:</b> Cobertura de radar aeronáutico de aproximación.</li>
-                    </ul>
-                </div>
-            </div>""", unsafe_allow_html=True)
+    st.image("infografia_modulo5.png", caption="Infografía de Soporte Técnico - Módulo 5", use_container_width=True)
 
     st.markdown("---")
     col1, col2 = st.columns([1, 2])
@@ -530,55 +265,7 @@ elif modulo == "5. Onda de Espacio (Tierra Curva)":
 # ==========================================
 elif modulo == "6. Presupuesto de Enlace (Link Budget)":
     st.title("📊 6.0 ESTUDIO DETALLADO: PRESUPUESTO DE ENLACE COMPLETO")
-    st.markdown("### 📊 INFOGRAFÍA DINÁMICA DEL SISTEMA")
-    
-    c1, c2 = st.columns(2)
-    with c1:
-        st.markdown("""
-            <div class="info-card" style="background-color: rgba(0, 150, 255, 0.1); border-color: #0096FF;">
-                <div class="card-title" style="color: #0096FF !important;">📈 CONCEPTO</div>
-                <div class="card-body">
-                    <ul>
-                        <li><b>Contabilidad de Potencia:</b> Balance logarítmico detallado de todas las ganancias y pérdidas presentes en el sistema.</li>
-                        <li><b>Potencia Recibida (Prx):</b> Nivel neto de potencia real que incide sobre el decodificador receptor.</li>
-                        <li><b>Margen de Desvanecimiento:</b> Colchón de seguridad para mitigar anomalías atmosféricas.</li>
-                    </ul>
-                </div>
-            </div>""", unsafe_allow_html=True)
-    with c2:
-        st.markdown("""
-            <div class="info-card" style="background-color: rgba(255, 165, 0, 0.1); border-color: #FFA500;">
-                <div class="card-title" style="color: #FFA500 !important;">⚠️ DEPENDENCIAS</div>
-                <div class="card-body">
-                    <ul>
-                        <li><b>Ganancia de Antenas (Gt, Gr):</b> Eficiencia directiva electromagnética de los transductores.</li>
-                        <li><b>Atenuación Estructural:</b> Pérdidas en cables, conectores tipo N/SMA y guías de onda.</li>
-                    </ul>
-                </div>
-            </div>""", unsafe_allow_html=True)
-
-    c3, c4 = st.columns(2)
-    with c3:
-        st.markdown("""
-            <div class="info-card" style="background-color: rgba(0, 200, 100, 0.1); border-color: #00C864;">
-                <div class="card-title" style="color: #00C864 !important;">🧮 FÓRMULA MATEMÁTICA</div>
-                <div class="card-body">
-                    <p>Ecuación matricial de Balance en Decibelios (dB/dBm):</p>
-                </div>
-            </div>""", unsafe_allow_html=True)
-        st.latex(r"P_{Rx}(dBm) = P_{Tx} + G_{Tx} + G_{Rx} - FSPL - Pérdidas_{Lineas}")
-    with c4:
-        st.markdown("""
-            <div class="info-card" style="background-color: rgba(150, 0, 200, 0.1); border-color: #9600C8;">
-                <div class="card-title" style="color: #9600C8 !important;">🚀 USOS Y APLICACIONES</div>
-                <div class="card-body">
-                    <ul>
-                        <li><b>A. Diseño Punto a Punto:</b> Dimensionamiento comercial de enlaces de microondas.</li>
-                        <li><b>B. Certificación de Cobertura:</b> Auditorías de red e ingeniería de preventa.</li>
-                        <li><b>C. Auditorías Satelitales:</b> Verificación de disponibilidad de transpondedores.</li>
-                    </ul>
-                </div>
-            </div>""", unsafe_allow_html=True)
+    st.image("infografia_modulo6.png", caption="Infografía de Soporte Técnico - Módulo 6", use_container_width=True)
 
     st.markdown("---")
     col1, col2 = st.columns([1, 2])
@@ -613,54 +300,7 @@ elif modulo == "6. Presupuesto de Enlace (Link Budget)":
 # ==========================================
 elif modulo == "7. Visualización de Antenas":
     st.title("📡 7.0 ESTUDIO DETALLADO: INTEGRACIÓN Y PATRONES DE RADIACIÓN")
-    st.markdown("### 📊 INFOGRAFÍA DINÁMICA DEL SISTEMA")
-    
-    c1, c2 = st.columns(2)
-    with c1:
-        st.markdown("""
-            <div class="info-card" style="background-color: rgba(0, 150, 255, 0.1); border-color: #0096FF;">
-                <div class="card-title" style="color: #0096FF !important;">📡 CONCEPTO</div>
-                <div class="card-body">
-                    <ul>
-                        <li><b>Patrón de Radiación:</b> Gráfica de la distribución relativa de la potencia irradiada en función de las coordenadas angulares.</li>
-                        <li><b>Directividad y Ganancia:</b> Capacidad física de focalizar la energía en direcciones preferenciales.</li>
-                    </ul>
-                </div>
-            </div>""", unsafe_allow_html=True)
-    with c2:
-        st.markdown("""
-            <div class="info-card" style="background-color: rgba(255, 165, 0, 0.1); border-color: #FFA500;">
-                <div class="card-title" style="color: #FFA500 !important;">⚠️ DEPENDENCIAS</div>
-                <div class="card-body">
-                    <ul>
-                        <li><b>Geometría Estructural:</b> La forma de los conductores e iluminadores altera físicamente los frentes de onda.</li>
-                        <li><b>Fase Eléctrica:</b> La temporización de las señales genera interferencias constructivas o destructivas controladas.</li>
-                    </ul>
-                </div>
-            </div>""", unsafe_allow_html=True)
-
-    c3, c4 = st.columns(2)
-    with c3:
-        st.markdown("""
-            <div class="info-card" style="background-color: rgba(0, 200, 100, 0.1); border-color: #00C864;">
-                <div class="card-title" style="color: #00C864 !important;">🧮 BASE MATEMÁTICA</div>
-                <div class="card-body">
-                    <p>Ecuación electromagnética de campo para arreglos y dipolos fundamentales:</p>
-                </div>
-            </div>""", unsafe_allow_html=True)
-        st.latex(r"E(\theta) = \cos\left(\frac{\pi}{2}\cos\theta\right)\Big/\sin\theta \qquad AF(\theta) = \sum_{n=1}^{N} e^{j n (k d \cos\theta + \beta)}")
-    with c4:
-        st.markdown("""
-            <div class="info-card" style="background-color: rgba(150, 0, 200, 0.1); border-color: #9600C8;">
-                <div class="card-title" style="color: #9600C8 !important;">🚀 USOS Y APLICACIONES</div>
-                <div class="card-body">
-                    <ul>
-                        <li><b>A. Redes Móviles 5G:</b> Beamforming activo por arreglos de fase avanzados.</li>
-                        <li><b>B. Sistemas de Radar:</b> Conmutación de haces electrónicos ultrarrápidos sin partes móviles.</li>
-                        <li><b>C. Redes de Distribución:</b> Cobertura de amplio rango sectorial y enlaces dedicados.</li>
-                    </ul>
-                </div>
-            </div>""", unsafe_allow_html=True)
+    st.image("infografia_modulo7.png", caption="Infografía de Soporte Técnico - Módulo 7", use_container_width=True)
 
     st.markdown("---")
     tipo_antena = st.selectbox("Seleccione el Tipo de Antena a Modelar:", [
@@ -681,7 +321,7 @@ elif modulo == "7. Visualización de Antenas":
         st.markdown("""
         ### 🔹 Antena Parabólica Direccional
         * **Geometría:** Reflector parabólico con un iluminador activo (bocina) fijado precisamente en el punto focal óptico.
-        * **Campos E/H:** Colima frentes de onda esféricos en un haz de rayos paralelos angostos de alta coherence. Logra ganancias colosales superiores a 30 dBi.
+        * **Campos E/H:** Colima frentes de onda esféricos en un haz de rayos paralelos angostos de alta coherencia. Logra ganancias colosales superiores a 30 dBi.
         * **Aplicaciones Reales:** Estaciones terrestres de comunicación satelital profunda, radioenlaces de microondas de alta capacidad de transporte.
         """)
     elif tipo_antena == "Antena Yagi-Uda":
@@ -696,7 +336,7 @@ elif modulo == "7. Visualización de Antenas":
         ### 🔹 Arreglo de Fase (Phased Array)
         * **Geometría:** Matriz planar integrada por múltiples antenas individuales idénticas alimentadas de forma independiente mediante desfasadores electrónicos digitales.
         * **Campos E/H:** Interferencia constructiva programable en tiempo real. Permite apuntar el lóbulo principal (Beamforming) electrónicamente en microsegundos.
-        * **Aplicaciones Reales:** Sistemas avanzados MIMO masivos de estaciones base 5G y radares militares de escaneo electrónico síncrono.
+        * **Aplicaciones Reales:** Sistemas avanzados MIMO masivos de estaciones base 5G y radares de escaneo electrónico síncrono.
         """)
 
     tab1, tab2 = st.tabs(["📊 Patrón de Radiación Polar 2D", "🧊 Representación Espacial 3D"])
