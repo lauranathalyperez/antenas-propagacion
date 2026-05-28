@@ -413,6 +413,29 @@ elif modulo == "4. Reflexión y Ley de Snell":
             theta2_rad = np.arcsin(sin_theta2)
             theta2 = np.degrees(theta2_rad)
             st.metric("Ángulo de Refracción Resultante (θ₂)", f"{theta2:.2f} °")
-
-        fig = go.Figure()
-        fig.add_trace(go.Scatter(x=[-np.sin(theta1_rad), 0], y=[np.cos(theta1_rad), 0], name="Rayo Incidente", line=dict(width=3, color='#0096
+fig = go.Figure()
+        
+        # Rayo Incidente
+        fig.add_trace(go.Scatter(
+            x=[-np.sin(theta1_rad), 0], 
+            y=[np.cos(theta1_rad), 0], 
+            name="Rayo Incidente", 
+            line=dict(width=3, color='#0096FF')
+        ))
+        
+        # Rayo Reflejado
+        fig.add_trace(go.Scatter(
+            x=[0, np.sin(theta1_rad)], 
+            y=[0, np.cos(theta1_rad)], 
+            name="Rayo Reflejado", 
+            line=dict(dash='dash', color='#FFA500')
+        ))
+        
+        # Rayo Refractado
+        if sin_theta2 <= 1.0:
+            fig.add_trace(go.Scatter(
+                x=[0, np.sin(theta2_rad)], 
+                y=[0, -np.cos(theta2_rad)], 
+                name="Rayo Refractado", 
+                line=dict(width=3, color='#00C864')
+            ))
