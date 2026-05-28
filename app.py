@@ -91,7 +91,7 @@ if modulo == "Introducción":
 # MÓDULO 1: ESPACIO LIBRE
 # ==========================================
 elif modulo == "1. Propagación en Espacio Libre":
-    st.title("✨ 1.0 ESTUDIO DETALLADO: PROPAGACIÓN EN ESPACIO LIBRE (Friis)")
+    st.title("✨ 1.0 PROPAGACIÓN EN ESPACIO LIBRE (Friis)")
     st.image("infografia_modulo1.png", caption="Infografía de Soporte Técnico - Módulo 1", use_container_width=True)
 
     st.markdown("---")
@@ -116,7 +116,7 @@ elif modulo == "1. Propagación en Espacio Libre":
 # MÓDULO 2: ATENUACIÓN POR LLUVIA
 # ==========================================
 elif modulo == "2. Atenuación por Lluvia":
-    st.title("🌧️ 2.0 ESTUDIO DETALLADO: ATENUACIÓN POR LLUVIA E HIDROMETEOROS")
+    st.title("🌧️ 2.0 ATENUACIÓN POR LLUVIA E HIDROMETEOROS")
     st.image("infografia_modulo2.png", caption="Infografía de Soporte Técnico - Módulo 2", use_container_width=True)
 
     st.markdown("---")
@@ -145,7 +145,7 @@ elif modulo == "2. Atenuación por Lluvia":
 # MÓDULO 3: RUIDO TÉRMICO Y SNR
 # ==========================================
 elif modulo == "3. Ruido Térmico y SNR":
-    st.title("🔊 3.0 ESTUDIO DETALLADO: RUIDO TÉRMICO Y SENSIBILIDAD")
+    st.title("🔊 3.0 RUIDO TÉRMICO Y SENSIBILIDAD")
     st.image("infografia_modulo3.png", caption="Infografía de Soporte Técnico - Módulo 3", use_container_width=True)
 
     st.markdown("---")
@@ -171,7 +171,7 @@ elif modulo == "3. Ruido Térmico y SNR":
 # MÓDULO 4: REFLEXIÓN Y SNELL (CORREGIDO)
 # ==========================================
 elif modulo == "4. Reflexión y Ley de Snell":
-    st.title("🪞 4.0 ESTUDIO DETALLADO: FENÓMENOS DE INTERFAZ Y LEY DE SNELL")
+    st.title("🪞 4.0 EFENÓMENOS DE INTERFAZ Y LEY DE SNELL")
     st.image("infografia_modulo4.png", caption="Infografía de Soporte Técnico - Módulo 4", use_container_width=True)
 
     st.markdown("---")
@@ -234,7 +234,7 @@ elif modulo == "4. Reflexión y Ley de Snell":
 # MÓDULO 5: TIERRA CURVA Y LÍNEA DE VISTA
 # ==========================================
 elif modulo == "5. Onda de Espacio (Tierra Curva)":
-    st.title("🌍 5.0 ESTUDIO DETALLADO: ONDA DE ESPACIO Y CURVATURA TERRESTRE")
+    st.title("🌍 5.0 ONDA DE ESPACIO Y CURVATURA TERRESTRE")
     st.image("infografia_modulo5.png", caption="Infografía de Soporte Técnico - Módulo 5", use_container_width=True)
 
     st.markdown("---")
@@ -264,7 +264,7 @@ elif modulo == "5. Onda de Espacio (Tierra Curva)":
 # MÓDULO 6: LINK BUDGET
 # ==========================================
 elif modulo == "6. Presupuesto de Enlace (Link Budget)":
-    st.title("📊 6.0 ESTUDIO DETALLADO: PRESUPUESTO DE ENLACE COMPLETO")
+    st.title("📊 6.0 PRESUPUESTO DE ENLACE COMPLETO")
     st.image("infografia_modulo6.png", caption="Infografía de Soporte Técnico - Módulo 6", use_container_width=True)
 
     st.markdown("---")
@@ -299,7 +299,7 @@ elif modulo == "6. Presupuesto de Enlace (Link Budget)":
 # MÓDULO 7: ANTENAS
 # ==========================================
 elif modulo == "7. Visualización de Antenas":
-    st.title("📡 7.0 ESTUDIO DETALLADO: INTEGRACIÓN Y PATRONES DE RADIACIÓN")
+    st.title("📡 7.0 INTEGRACIÓN Y PATRONES DE RADIACIÓN")
     st.image("infografia_modulo7.png", caption="Infografía de Soporte Técnico - Módulo 7", use_container_width=True)
 
     st.markdown("---")
